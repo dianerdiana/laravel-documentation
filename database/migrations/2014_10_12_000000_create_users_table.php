@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('avatar', 100)->nullable();
             $table->string('role', 20)->default('user');
             $table->rememberToken();
+            $table->bigInteger('company_id')->nullable();
             $table->foreign('company_id')
                 ->references('id_company')
                 ->on('companies')
