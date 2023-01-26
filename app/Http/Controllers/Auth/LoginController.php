@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -46,7 +47,7 @@ class LoginController extends Controller
      * @return Renderable
      */
     public function index() {
-        return view('pages.auth.login');
+        return view('auth.login');
     }
 
     public function login(LoginRequest $request) {
@@ -75,5 +76,17 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         return redirect()->route('home');
+    }
+
+    /**
+     * Log out account user.
+     *
+     * @return \Illuminate\Routing\Redirector
+     */
+    public function logout()
+    {
+        Session::flush();
+        Auth::logout();
+        return redirect('/');
     }
 }

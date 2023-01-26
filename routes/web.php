@@ -26,12 +26,19 @@ Route::group(['namespace' => 'App\Http\Controllers'], function() {
     });
 
     Route::group(['middleware' => ['auth']], function() {
+        Route::get('/', function() {
+            if (Auth::check()) {
+                return redirect()->route('home');
+            }
+
+            return redirect()->route('login');
+        });
         Route::controller(HomeController::class)->group(function() {
-            Route::get('/home', 'index')->name('home');
+            Route::get('/dashboard', 'index')->name('home');
         });
 
-        Route::get('/dashboard', function () {
-            return view('pages.dashboard.index');
+        Route::group(['namespace' => 'Auth', 'controller' => LoginController::class], function() {
+            Route::get('/logout', 'logout')->name('logout');
         });
     });
 

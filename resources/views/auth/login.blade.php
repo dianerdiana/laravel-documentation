@@ -1,3 +1,5 @@
+@extends('layouts.auth')
+
 @section('content')
   <div class="auth-wrapper auth-basic px-2">
     <div class="auth-inner my-2">
@@ -12,15 +14,23 @@
           <h4 class="card-title mb-1">Welcome to Vuexy! 👋</h4>
           <p class="card-text mb-2">Please sign-in to your account and start the adventure</p>
 
+          @if ($errors)
+            @foreach ($errors as $error)
+              <div class="text-danger">
+                {{ $error }}
+              </div>
+            @endforeach
+          @endif
+
           <form class="auth-login-form mt-2" action="{{ route('login.perform') }}" method="POST">
             @csrf
             <div class="mb-1">
-              <label for="email" class="form-label">Email</label>
-              <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email"
-                placeholder="john@example.com" aria-describedby="email" tabindex="1" value="{{ old('email') }}" required
+              <label for="username" class="form-label">Username or Email</label>
+              <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username"
+                placeholder="john@example.com" aria-describedby="username" tabindex="1" value="{{ old('username') }}" required
                 autocomplete="email" autofocus />
 
-              @error('email')
+              @error('username')
                 <div class="invalid-feedback" role="alert">
                   <strong>{{ $message }}</strong>
                 </div>
