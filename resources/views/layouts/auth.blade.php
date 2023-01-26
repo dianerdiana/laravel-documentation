@@ -18,9 +18,9 @@
     rel="stylesheet">
 
   <!-- BEGIN: CSS-->
+  @include('partials.styles')
   <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/plugins/forms/form-validation.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/pages/authentication.css') }}">
-  @include('partials.styles')
   <!-- END: CSS-->
 
 </head>
@@ -45,8 +45,8 @@
   <!-- END: Content-->
 
   <!-- BEGIN: JS-->
-  <script src="{{ asset('app-assets/vendors/js/forms/validation/jquery.validate.min.js') }}"></script>
   @include('partials.scripts')
+  <script src="{{ asset('app-assets/vendors/js/forms/validation/jquery.validate.min.js') }}"></script>
   <!-- BEGIN JS-->
 
   <script>

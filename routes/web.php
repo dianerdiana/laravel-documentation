@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,9 +14,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.dashboard.index');
-});
-Route::get('/login', function () {
-    return view('pages.auth.login');
+Route::group(['namespace' => 'App\Http\Controllers'], function() {
+
+    Route::group(['middleware' => ['guest']], function() {
+        Route::group(['namespace' => 'Auth'], function() {
+            Route::controller(LoginController::class)->group(function() {
+                Route::get('/login', 'index')->name('login');
+                Route::post('/login', 'login')->name('login.perform');
+            });
+        });
+    });
+
+    Route::group(['middleware' => ['auth']], function() {
+        Route::controller(HomeController::class)->group(function() {
+            Route::get('/home', 'index')->name('home');
+        });
+
+        Route::get('/dashboard', function () {
+            return view('pages.dashboard.index');
+        });
+    });
+
 });
