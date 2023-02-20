@@ -23,8 +23,8 @@ return new class extends Migration
             $table->boolean('is_active')->default(true);
             $table->integer('is_status')->default(1);
             $table->string('avatar', 100)->nullable();
-            $table->string('role', 20)->default('user');
-            $table->string('current_plan', 20)->default('Company');
+            $table->integer('role_id', 20)->default(2);
+            $table->integer('plan_id', 20)->default(1);
             $table->string('billing', 225)->default('Manual - Credit Card');
             $table->rememberToken();
             $table->bigInteger('company_id')->nullable();
