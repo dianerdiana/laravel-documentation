@@ -20,6 +20,6 @@
 <!-- END: Page CSS-->
 
 <!-- BEGIN: Custom CSS-->
-@yield('css')
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
+@yield('css')
 <!-- END: Custom CSS-->

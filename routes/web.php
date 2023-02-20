@@ -14,32 +14,36 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['namespace' => 'App\Http\Controllers'], function() {
+Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
-    Route::group(['middleware' => ['guest']], function() {
-        Route::group(['namespace' => 'Auth'], function() {
-            Route::controller(LoginController::class)->group(function() {
+    Route::group(['middleware' => ['guest']], function () {
+        Route::group(['namespace' => 'Auth'], function () {
+            Route::controller(LoginController::class)->group(function () {
                 Route::get('/login', 'index')->name('login');
                 Route::post('/login', 'login')->name('login.perform');
             });
         });
     });
 
-    Route::group(['middleware' => ['auth']], function() {
-        Route::get('/', function() {
+    Route::group(['middleware' => ['auth']], function () {
+        Route::get('/', function () {
             if (Auth::check()) {
                 return redirect()->route('home');
             }
 
             return redirect()->route('login');
         });
-        Route::controller(HomeController::class)->group(function() {
+
+        Route::controller(HomeController::class)->group(function () {
             Route::get('/dashboard', 'index')->name('home');
         });
 
-        Route::group(['namespace' => 'Auth', 'controller' => LoginController::class], function() {
+        Route::group(['namespace' => 'Datatable'], function () {
+            Route::resource('server-side', ServerSideController::class);
+        });
+
+        Route::group(['namespace' => 'Auth', 'controller' => LoginController::class], function () {
             Route::get('/logout', 'logout')->name('logout');
         });
     });
-
 });
