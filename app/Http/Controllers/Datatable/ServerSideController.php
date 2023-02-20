@@ -3,49 +3,64 @@
 namespace App\Http\Controllers\Datatable;
 
 use App\Http\Controllers\Controller;
+use App\Models\User\User;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class ServerSideController extends Controller
 {
-    // INDEX Function
-    public function index()
-    {
-        return view('pages.datatable.advanced');
+  protected $user;
+
+  public function __construct(User $user)
+  {
+    $this->user = $user;
+  }
+
+  // INDEX Function
+  public function index(Request $request)
+  {
+    if ($request->ajax()) {
+      $builder  = $this->user->with(['role', 'plan']);
+
+      return DataTables::eloquent($builder)->toJson();
     }
 
-    // CREATE Function
-    public function create()
-    {
-        //
-    }
+    return view('pages.datatable.advanced');
+  }
 
-    // STORE Function
-    public function store(Request $request)
-    {
-        //
-    }
+  // CREATE Function
+  public function create()
+  {
+    //
+  }
 
-    // SHOW Function
-    public function show($id)
-    {
-        //
-    }
+  // STORE Function
+  public function store(Request $request)
+  {
+    //
+  }
 
-    // EDIT Function
-    public function edit($id)
-    {
-        //
-    }
+  // SHOW Function
+  public function show($id)
+  {
+    //
+  }
 
-    // UPDATE Function
-    public function update(Request $request, $id)
-    {
-        //
-    }
+  // EDIT Function
+  public function edit($id)
+  {
+    //
+  }
 
-    // DESTROY Function
-    public function destroy($id)
-    {
-        //
-    }
+  // UPDATE Function
+  public function update(Request $request, $id)
+  {
+    //
+  }
+
+  // DESTROY Function
+  public function destroy($id)
+  {
+    //
+  }
 }
