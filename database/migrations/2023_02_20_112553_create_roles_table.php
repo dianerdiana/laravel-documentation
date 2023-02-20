@@ -22,7 +22,7 @@ return new class extends Migration
             $table->timestamp('created_at')->useCurrent();
             $table->integer('created_by')->nullable()->default(1);
             $table->timestamp('updated_at')->useCurrent();
-            $table->integer('updated_by')->nullable()->default(1);
+            $table->integer('updated_by')->nullable();
         });
     }
 

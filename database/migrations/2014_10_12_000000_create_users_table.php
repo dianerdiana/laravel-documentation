@@ -23,8 +23,8 @@ return new class extends Migration
             $table->boolean('is_active')->default(true);
             $table->integer('is_status')->default(1);
             $table->string('avatar', 100)->nullable();
-            $table->integer('role_id', 20)->default(2);
-            $table->integer('plan_id', 20)->default(1);
+            $table->integer('role_id')->default(2);
+            $table->integer('plan_id')->default(1);
             $table->string('billing', 225)->default('Manual - Credit Card');
             $table->rememberToken();
             $table->bigInteger('company_id')->nullable();
@@ -36,7 +36,7 @@ return new class extends Migration
             $table->timestamp('created_at')->useCurrent();
             $table->integer('created_by')->nullable()->default(1);
             $table->timestamp('updated_at')->useCurrent();
-            $table->integer('updated_by')->nullable()->default(1);
+            $table->integer('updated_by')->nullable();
         });
     }
 
